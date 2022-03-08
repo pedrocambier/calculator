@@ -13,7 +13,15 @@
 
 .display {
   width: 100%;
-  height: 30%;
+}
+
+.display.dspl-history {
+  height: 10%;
+  background-color: green;
+}
+
+.display.dspl-main {
+  height: 20%;
   background-color: green;
 }
 
