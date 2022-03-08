@@ -1,0 +1,29 @@
+.💪{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.main-container {
+  width: 500px;
+  height: 600px;
+  background-color: red;
+}
+
+.display {
+  width: 100%;
+  height: 30%;
+  background-color: green;
+}
+
+.buttons-container {
+  width: 100%;
+  height: 70%;
+  background-color: blue;
+}
+
+.button {
+  width: 25%;
+  height: 20%;
+}
