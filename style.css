@@ -1,3 +1,7 @@
+body {
+  box-sizing: border-box;
+}
+
 .💪{
   display: flex;
   justify-content: center;
@@ -8,30 +12,53 @@
 .main-container {
   width: 500px;
   height: 600px;
-  background-color: red;
+  background-color: transparent;
 }
 
 .display {
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: whitesmoke;
 }
 
 .display.dspl-history {
   height: 10%;
-  background-color: green;
 }
 
 .display.dspl-main {
   height: 20%;
-  background-color: green;
+}
+
+.display.💪 {
+  justify-content: flex-end;
 }
 
 .buttons-container {
   width: 100%;
   height: 70%;
-  background-color: blue;
+  background-color: transparent;
 }
 
 .button {
   width: 25%;
   height: 20%;
+  border-radius: 12px;
+}
+
+.number,
+.btn-decimal,
+.btn-sign {
+  background-color: rgb(255, 102, 0, 0.7);
+}
+
+.operate {
+  background-color: rgb(97, 99, 116, 0.7);
+}
+
+.btn-equal {
+  background-color: rgba(57, 58, 70, 0.7);
+}
+
+.util {
+  background-color: rgb(218, 204, 8, 0.7);
 }

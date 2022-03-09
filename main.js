@@ -1,5 +1,6 @@
 // Auxiliary global constants
 const tol = 1e-5;
+const numberDecimals = 3;
 
 // global DOM elements
 const displayMain = document.querySelector('.dspl-main');
@@ -12,6 +13,13 @@ let recentEqual = false;
 let firstOperand = '';
 let activeValue = '0';
 let activeOperation = '';
+
+// Auxiliary funcrions for calculations
+
+// Round numbers
+const roundNumber = (number, ndec) => {
+  return (Math.round((number + Number.EPSILON) * (10 ** ndec)) / (10 ** ndec));
+}
 
 // Basic operations functions
 const add = (a,b) => {
@@ -46,26 +54,29 @@ const percent = (a,b) => {
 }
  
 const operate = (a, b, operation) => {
+  let result = 0;
   switch (operation) 
   {
     case ' + ':
-      return add(a, b);
-
+      result =  add(a, b);
+      break;
     case ' - ':
-      return subtract(a, b);
-
+      result =  subtract(a, b);
+      break;
     case ' * ':
-      return multiply(a, b);
-
+      result =  multiply(a, b);
+      break;
     case ' / ':
-      return divide(a, b);
-
+      result =  divide(a, b);
+      break;
     case ' % ':
-      return percent(a, b);
-
+      result =  percent(a, b);
+      break;
     default:
-      return '👁👄👁';
+      result =  '👁👄👁';
+      break;
   }
+  return roundNumber(result, numberDecimals);
 }
 
 // History manager
