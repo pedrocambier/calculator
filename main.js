@@ -1,10 +1,12 @@
 // Auxiliary global constants
 const tol = 1e-5;
-const numberDecimals = 3;
+const numberDecimals = 3; 
 
 // global DOM elements
 const displayMain = document.querySelector('.dspl-main');
 const displayHistory = document.querySelector('.dspl-history');
+const historyFirstLine = document.querySelector('.first-line');
+const historySecondLine = document.querySelector('.second-line');
 
 // Global auxiliary state flags
 let recentEqual = false;
@@ -13,7 +15,23 @@ let recentEqual = false;
 let firstOperand = '';
 let activeValue = '0';
 let activeOperation = '';
+let history = {
+  oldest: '',
+  newest: ''
+}
 
+// Auxliary functions for history managment
+const addHistory = calulation => {
+  history.oldest = history.newest;
+  history.newest = calulation;
+  historyFirstLine.textContent = history.oldest;
+  historySecondLine.textContent = history.newest;
+}
+
+const manageHistory = (result = 0, clear = true) => {
+  if (clear) displayHistory.textContent = '';
+  addHistory(displayMain.textContent + ' = ' + result.toString());
+} 
 // Auxiliary funcrions for calculations
 
 // Round numbers
@@ -78,12 +96,6 @@ const operate = (a, b, operation) => {
   }
   return roundNumber(result, numberDecimals);
 }
-
-// History manager
-const manageHistory = (result = 0, clear = true) => {
-  if (clear) displayHistory.textContent = '';
-  else displayHistory.textContent = displayMain.textContent + ' = ' + result.toString();
-} 
 
 // Button callback
 const buttonClickEvent = event => {

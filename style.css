@@ -1,5 +1,17 @@
 body {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+}
+
+div p {
+  color: white;
+  width: 100%;
+  height: 50%;
+  margin: 0;
+  font-weight: 400;
 }
 
 .💪{
@@ -10,26 +22,35 @@ body {
 }
 
 .main-container {
-  width: 500px;
+  width: 400px;
   height: 600px;
   background-color: transparent;
+  border-radius: 12px;
+  box-shadow: 5px 15px 15px -10px rgba(0, 0, 0, 0.493);
 }
 
 .display {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
-  color: whitesmoke;
+  width: 90%;
+  background-color: #14140F;;
+  opacity: 0.85;
+  padding: 0 5%;
 }
 
 .display.dspl-history {
-  height: 10%;
+  height: 15%;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 .display.dspl-main {
-  height: 20%;
+  height: 15%;
+  font-size: 50px;
+  font-weight: 700;
+  color: white;
 }
 
-.display.💪 {
+.display.💪,
+p.💪 {
   justify-content: flex-end;
 }
 
@@ -42,23 +63,40 @@ body {
 .button {
   width: 25%;
   height: 20%;
-  border-radius: 12px;
+  font-size: x-large;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.btn-decimal {
+  border-bottom-left-radius: 12px;
 }
 
 .number,
 .btn-decimal,
 .btn-sign {
-  background-color: rgb(255, 102, 0, 0.7);
+  background-color: #053D38;
+  /* color: rgb(238, 230, 230); */
+  color: #fff;
 }
 
-.operate {
-  background-color: rgb(97, 99, 116, 0.7);
+.button.operate {
+  background-color: #34675C;
+  /* color: rgb(238, 230, 230); */
+  color: #fff;
+  font-weight: 600;
 }
 
-.btn-equal {
-  background-color: rgba(57, 58, 70, 0.7);
+.button.btn-equal {
+  background-color: #F26800;
+  /* color: rgb(238, 230, 230); */
+  color: #fff;
+  font-weight: 600;
+  border-bottom-right-radius: 12px;
 }
 
-.util {
-  background-color: rgb(218, 204, 8, 0.7);
+.button.util {
+  /* background-color: #A3CCAB; */
+  background-color: #58755f;
+  font-weight: 600;
 }
