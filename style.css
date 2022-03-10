@@ -1,17 +1,43 @@
 body {
-  /* box-sizing: border-box; */
+  box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
   padding: 0;
   margin: 0;
   height: 100vh;
 }
 
-div p {
+p {
   color: white;
-  width: 100%;
-  height: 50%;
+  opacity: 0.8;
   margin: 0;
   font-weight: 400;
+  position: absolute;
+  width: 86%;
+  padding: 24px 0;
+  transition: top 200ms ease-out,
+              bottom 200ms ease-out;
+}
+
+i {
+  pointer-events: none;
+}
+
+.transition-none {
+  transition: none !important;
+}
+
+.first-line{
+  top: 0%;
+  bottom: 50%;
+}
+.second-line{
+  top: 50%;
+  bottom: 0%;
+}
+
+.third-line{
+  top: 100%;
+  bottom: -50%
 }
 
 .💪{
@@ -30,29 +56,40 @@ div p {
 }
 
 .display {
-  width: 90%;
+  width: 86%;
   background-color: #14140F;;
   opacity: 0.85;
-  padding: 0 5%;
+  padding: 0 7%;
 }
 
 .display.dspl-history {
   height: 15%;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
+  position: relative;
+  overflow: hidden;
 }
 
 .display.dspl-main {
   height: 15%;
-  font-size: 50px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 400;
   color: white;
 }
 
-.display.💪,
-p.💪 {
+.display.💪 {
   justify-content: flex-end;
 }
+
+p.💪 {
+  justify-content: flex-start;
+}
+
+
+/* .display.💪,
+p.💪 {
+  justify-content: flex-end;
+} */
 
 .buttons-container {
   width: 100%;
@@ -66,6 +103,12 @@ p.💪 {
   font-size: x-large;
   font-weight: 400;
   opacity: 0.7;
+  user-select: none;
+  transition: opacity 300ms ease-out;
+}
+
+.button:hover {
+  opacity: 0.6;
 }
 
 .btn-decimal {

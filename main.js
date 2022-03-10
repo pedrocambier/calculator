@@ -7,11 +7,13 @@ const displayMain = document.querySelector('.dspl-main');
 const displayHistory = document.querySelector('.dspl-history');
 const historyFirstLine = document.querySelector('.first-line');
 const historySecondLine = document.querySelector('.second-line');
+const historyThirdLine = document.querySelector('.third-line');
 
 // Global auxiliary state flags
 let recentEqual = false;
 
 // Global variables
+let transitionTime = 200;
 let firstOperand = '';
 let activeValue = '0';
 let activeOperation = '';
@@ -19,18 +21,48 @@ let history = {
   oldest: '',
   newest: ''
 }
+let historyCicle = [historyFirstLine, historySecondLine, historyThirdLine];
 
 // Auxliary functions for history managment
+const cicleHistory = () => {
+  const aux = historyCicle[0];
+  historyCicle[0] = historyCicle[1];
+  historyCicle[1] = historyCicle[2];
+  historyCicle[2] = aux;
+
+  historyCicle[2].classList.add('transition-none');
+  historyCicle[2].style.top = '100%';
+  historyCicle[2].style.bottom = '-50%';
+  setTimeout(() => historyCicle[2].classList.remove('transition-none'), transitionTime);
+}
+
+const positionHistory = () => {
+  historyCicle[0].style.top = '-50%';
+  historyCicle[0].style.bottom = '100%';
+
+  historyCicle[1].style.top = '0%';
+  historyCicle[1].style.bottom = '50%';
+
+  historyCicle[2].style.top = '50%';
+  historyCicle[2].style.bottom = '0%';
+}
+
 const addHistory = calulation => {
   history.oldest = history.newest;
   history.newest = calulation;
-  historyFirstLine.textContent = history.oldest;
-  historySecondLine.textContent = history.newest;
+  historyCicle[1].textContent = history.oldest;
+  historyCicle[2].textContent = history.newest;
+  positionHistory();
+  setTimeout(cicleHistory, transitionTime);
 }
 
 const manageHistory = (result = 0, clear = true) => {
-  if (clear) displayHistory.textContent = '';
-  addHistory(displayMain.textContent + ' = ' + result.toString());
+  if (clear) {
+    historyCicle.forEach(item => item.textContent = '');
+    history.oldest = '';
+    history.newest = '';
+  }
+  else addHistory(displayMain.textContent + ' = ' + result.toString());
 } 
 // Auxiliary funcrions for calculations
 
