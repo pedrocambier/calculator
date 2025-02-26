@@ -215,56 +215,19 @@ const manageDel = () => {
 const buttonClickEvent = event => {
 	const button = event.target;
 	if (button.classList.contains('number')) {
-		if (recentEqual) {
-			activeValue = button.textContent;
-			recentEqual = false;
-		}
-		else if (activeValue === '0') activeValue = button.textContent;
-		else activeValue += button.textContent;
+		manageNumber(button.textContent);
 	} else if (button.classList.contains('operate')) {
-		if (activeValue === errorNan) return;
-		if (firstOperand !== '' && activeValue !== '' && activeOperation !== '') {
-			const result = operate(firstOperand, activeValue, activeOperation);
-			manageHistory(result, false);
-			firstOperand = '';
-			activeValue = result.toString();
-		}
-		activeOperation = button.textContent;
-		if (firstOperand === '') {
-			firstOperand = activeValue;
-			activeValue = '';
-		}
+		manageOperation(button.textContent);
 	} else if (button.classList.contains('btn-equal')) {
-		if (firstOperand !== '' && activeValue !== '' && activeOperation !== '') {
-			recentEqual = true;
-			const result = operate(firstOperand, activeValue, activeOperation);
-			manageHistory(result, false);
-			firstOperand = '';
-			activeOperation = '';
-			activeValue = result.toString();
-		}
+		manageEqual();
 	} else if (button.classList.contains('btn-clear')) {
-		firstOperand = '';
-		activeOperation = '';
-		activeValue = '0';
-		recentEqual = false;
-		manageHistory();
+		manageClear();
 	} else if (button.classList.contains('btn-sign')) {
-		if (activeValue === errorNan || activeValue === '' || activeValue === '0' || recentEqual) return;
-		activeValue *= -1;
+		manageSign();
 	} else if (button.classList.contains('btn-decimal')) {
-		if (activeValue === errorNan || activeValue === '' || activeValue.includes('.') || recentEqual) return;
-		activeValue += button.textContent;
+		manageDecimal(button.textContent);
 	} else if (button.classList.contains('btn-del')) {
-		if (activeValue === errorNan || recentEqual || (activeOperation === '' && firstOperand === '' && (activeValue === '' || activeValue === '0'))) return;
-		if (activeOperation !== '' && activeValue === '') {
-			activeValue = firstOperand;
-			activeOperation = '';
-			firstOperand = '';
-		} else {
-			activeValue = activeValue.slice(0, activeValue.length - 1);
-			if (activeValue === '' && activeOperation === '') activeValue = '0';
-		}
+		manageDel(button.textContent);
 	}
 	displayMain.textContent = firstOperand + activeOperation + activeValue;
 }
@@ -272,8 +235,22 @@ const buttonClickEvent = event => {
 const onKeyDown = (event) => {
 	if (!event.altKey && !event.ctrlKey && !event.metaKey) {
 		const key = event.key;
-		if (key)
+		console.log(key);
+		if (key === '-' || key === '+' || key === '*' || key === '/' || key === '%') {
+			manageOperation(` ${key} `);
+		} else if (!Number.isNaN(parseInt(key))) {
+			manageNumber(key);
+		} else if (key === '=' || key === 'Enter') {
+			manageEqual();
+		} else if (key === '.') {
+			manageDecimal(key);
+		} else if ( key === 'c'){
+			manageClear();
+		} else if ( key === 'Backspace') {
+			manageDel();
+		}
 	}
+	displayMain.textContent = firstOperand + activeOperation + activeValue;
 }
 
 // Callback event listeners set
